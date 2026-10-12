@@ -120,10 +120,10 @@ target_link_libraries(
 if(APPLE)
 
 install(TARGETS ${PROJECT_NAME}
-    RUNTIME DESTINATION sbin
+    RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/sbin
 )
 install(FILES launchd/org.simulpiscator.airsaned.plist
-    DESTINATION /Library/LaunchDaemons
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/Library/LaunchDaemons
 )
 
 install(CODE "
@@ -157,7 +157,7 @@ else()
 endif()
 
 install(TARGETS ${PROJECT_NAME}
-    RUNTIME DESTINATION sbin
+    RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/sbin
 )
 
 install(CODE "
@@ -189,35 +189,35 @@ install(CODE "
 else()
 
 install(TARGETS ${PROJECT_NAME}
-    RUNTIME DESTINATION bin
+    RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
 )
 configure_file(systemd/airsaned.service.in ${CMAKE_BINARY_DIR}/airsaned.service @ONLY)
 install(FILES ${CMAKE_BINARY_DIR}/airsaned.service
-    DESTINATION /lib/systemd/system
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/systemd/system
 )
 install(FILES systemd/airsaned.default
-    DESTINATION /etc/default
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/etc/default
     RENAME airsane
 )
 
 install(CODE "
     if(NOT EXISTS /etc/airsane/access.conf)
-        file(INSTALL ${CMAKE_SOURCE_DIR}/etc/access.conf DESTINATION /etc/airsane)
+        file(INSTALL ${CMAKE_SOURCE_DIR}/etc/access.conf DESTINATION ${CMAKE_INSTALL_PREFIX}/etc/airsane)
     endif()
 ")
 install(CODE "
     if(NOT EXISTS /etc/airsane/ignore.conf)
-        file(INSTALL ${CMAKE_SOURCE_DIR}/etc/ignore.conf DESTINATION /etc/airsane)
+        file(INSTALL ${CMAKE_SOURCE_DIR}/etc/ignore.conf DESTINATION ${CMAKE_INSTALL_PREFIX}/etc/airsane)
     endif()
 ")
 install(CODE "
     if(NOT EXISTS /etc/airsane/options.conf)
-        file(INSTALL ${CMAKE_SOURCE_DIR}/etc/options.conf DESTINATION /etc/airsane)
+        file(INSTALL ${CMAKE_SOURCE_DIR}/etc/options.conf DESTINATION ${CMAKE_INSTALL_PREFIX}/etc/airsane)
     endif()
 ")
 install(CODE "
     if(NOT EXISTS /etc/airsane/Gnome-scanner.png)
-        file(INSTALL ${CMAKE_SOURCE_DIR}/etc/Gnome-scanner.png DESTINATION /etc/airsane)
+        file(INSTALL ${CMAKE_SOURCE_DIR}/etc/Gnome-scanner.png DESTINATION ${CMAKE_INSTALL_PREFIX}/etc/airsane)
     endif()
 ")
 
