@@ -120,6 +120,8 @@
                 '';
                 User = "scanner";
                 Group = "scanner";
+                Restart = "on-failure";
+                RestartSec = "5";
               };
             };
             users.groups.scanner.gid = config.ids.gids.scanner;
